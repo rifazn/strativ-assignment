@@ -19,4 +19,7 @@ urlpatterns = [
     # JSON query of countries speaking the language provided
     path('rest/language/<str:language>/', views.api_same_language,
          name='same_language'),
+    # JSON query by search pattern
+    path('rest/search_country/<str:search_term>/', views.api_search_country,
+         name='api_search_country'),
 ]

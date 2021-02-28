@@ -20,6 +20,18 @@ def api_country_name(request, name):
         err = {'message': 'Sorry. That country name does not exist'}
         return JsonResponse(err, status=404)
 
+def api_search_country(request, search_term):
+    """
+    JSON response returning all countries where names contain 'search_term'
+    """
+    countries = Country.objects.filter(name__icontains=search_term)
+    if countries.count() > 0:
+        countries_list = list(countries.values())
+        return JsonResponse(countries_list, safe=False)
+    else:
+        err = {'message': 'Your search term matched no country names'}
+        return JsonResponse(err, status=404)
+
 def api_neighbours(request, name):
     """
     Return as strings alpha3Code encoded list of neighbours of the specified
@@ -44,6 +56,7 @@ def api_same_language(request, language):
         return JsonResponse(err, status=400)
     else:
         # Check if language name has digits in it
+        # Could be easier using regex
         chars = list(language)
         hasDigits = True
 
@@ -59,6 +72,7 @@ def api_same_language(request, language):
                 languages not supported yet.'
             }
             return JsonResponse(err, 404)
+
     same_lang_countries = Country.objects.filter(languages__icontains=language)
     countries_list = list(same_lang_countries.values())
 
