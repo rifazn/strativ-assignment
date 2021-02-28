@@ -13,7 +13,7 @@ def api_all(request):
 
 def api_country_name(request, name):
     try:
-        country = Country.objects.get(name=name)
+        country = Country.objects.get(name__iexact=name)
         return JsonResponse(model_to_dict(country))
     except Exception as er:
         print(er)
