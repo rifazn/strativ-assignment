@@ -16,4 +16,7 @@ urlpatterns = [
     path('rest/country/<str:name>/', views.api_country_name, name='api_country_name'),
     # JSON query of neighbors of a specific country
     path('rest/neighbours/<str:name>/', views.api_neighbours, name='api_neighbours'),
+    # JSON query of countries speaking the language provided
+    path('rest/language/<str:language>/', views.api_same_language,
+         name='same_language'),
 ]

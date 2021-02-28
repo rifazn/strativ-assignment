@@ -34,5 +34,35 @@ def api_neighbours(request, name):
         err = {'message': 'Sorry. That country name does not exist'}
         return JsonResponse(err, status=404)
 
+def api_same_language(request, language):
+    """
+    JSON Response list of all countries speaking 'language'
+    """
+    # Some sanity checks
+    if len(language) < 1:
+        err = {'message': 'Language cannot be of zero length.'}
+        return JsonResponse(err, status=400)
+    else:
+        # Check if language name has digits in it
+        chars = list(language)
+        hasDigits = True
+
+        for digit in range(10):
+            if digit in chars:
+                break
+        else:
+            hasDigits = False
+
+        if hasDigits:
+            err = {
+                'message': 'Your language name has digits. Sorry, robot \
+                languages not supported yet.'
+            }
+            return JsonResponse(err, 404)
+    same_lang_countries = Country.objects.filter(languages__icontains=language)
+    countries_list = list(same_lang_countries.values())
+
+    return JsonResponse(countries_list, safe=False)
+
 def index(request):
     return HttpResponse("Hello!")
