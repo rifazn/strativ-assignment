@@ -20,5 +20,19 @@ def api_country_name(request, name):
         err = {'message': 'Sorry. That country name does not exist'}
         return JsonResponse(err, status=404)
 
+def api_neighbours(request, name):
+    """
+    Return as strings alpha3Code encoded list of neighbours of the specified
+    country.
+    """
+    try:
+        country = Country.objects.get(name__iexact=name)
+        neighbours = country.neighbouring_countries
+        return JsonResponse({'neighbours': neighbours})
+    except Exception as er:
+        print(er)
+        err = {'message': 'Sorry. That country name does not exist'}
+        return JsonResponse(err, status=404)
+
 def index(request):
     return HttpResponse("Hello!")
