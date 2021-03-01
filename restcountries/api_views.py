@@ -1,14 +1,15 @@
 from rest_framework import viewsets, generics, renderers, filters
 from rest_framework.decorators import action, action
 from rest_framework.response import Response
+
 from .models import Country
 from .serializers import CountrySerializer
+from .filters import CustomSearchFilter
 
 class CountryViewset(viewsets.ModelViewSet):
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
-    search_fields = ['name']
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (CustomSearchFilter,)
 
     @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
     def languages(self, request, *args, **kwargs):
@@ -26,3 +27,4 @@ class LanguageList(generics.ListAPIView):
     def get_queryset(self):
         language = self.kwargs['language']
         return Country.objects.filter(languages__icontains=language)
+
