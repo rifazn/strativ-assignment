@@ -7,6 +7,13 @@ from .serializers import CountrySerializer
 class CountryViewset(viewsets.ModelViewSet):
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
+    search_fields = ['name']
+    filter_backends = (filters.SearchFilter,)
+
+    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
+    def languages(self, request, *args, **kwargs):
+        country = self.get_object()
+        return Response(country.languages)
 
     @action(detail=True)
     def neighbours(self, request, *args, **kwargs):
