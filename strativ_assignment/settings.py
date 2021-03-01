@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # My application assignment
     'restcountries',
+    # DRF for making APIs
+    'rest_framework',
 
     'django.contrib.admin',
     'django.contrib.auth',
