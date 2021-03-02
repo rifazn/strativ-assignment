@@ -1,5 +1,5 @@
-from rest_framework import viewsets, generics, renderers, filters
-from rest_framework.decorators import action, action
+from rest_framework import viewsets, generics, filters
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .models import Country
@@ -11,17 +11,16 @@ class CountryViewset(viewsets.ModelViewSet):
     serializer_class = CountrySerializer
     filter_backends = (CustomSearchFilter,)
 
-    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
-    def languages(self, request, *args, **kwargs):
-        country = self.get_object()
-        return Response(country.languages)
-
+    # Get neighbours of a country instance
     @action(detail=True)
     def neighbours(self, request, *args, **kwargs):
         country = self.get_object()
         return Response(country.neighbouring_countries)
 
 class LanguageList(generics.ListAPIView):
+    """
+    Get the list of countries who speak the language specified
+    """
     serializer_class = CountrySerializer
 
     def get_queryset(self):
