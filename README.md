@@ -21,16 +21,26 @@ quite well. I had to use StackOverflow and the official tutorial pages to really
 be able to complete my tasks for the assignment. Now that I have learned the
 framework, doing the same "basic" things should become much easier for me.
 
+## Project structure
+
+The name of the project is `interview-assignment` and the main app is called
+`restcountries`.
+
+## Instructions
+
+1. Initialize a virtual environment
+
+    $ python -m venv venv
+    $ source venv/bin/activate
+
+2. Install the requirements: `pip install -r requirements`
+3. Run the server: `python manage.py runserver`
+
 ## Admin user
 
 I created the admin user `admin` with password `1` that can be used to test
 project initially. New users can be made by browsing the root url of the
 project and click "Register" on the left side of the page.
-
-## Project structure
-
-The name of the project is `interview-assignment` and the main app is called
-`restcountries`.
 
 ## Phase 1
 
