@@ -31,6 +31,16 @@ def edit_country(request, pk):
     context = {'form': form}
     return render(request, 'restcountries/edit_country.html', context)
 
+def search_country(request):
+    query = request.GET.get('name')
+    if query:
+        countries = Country.objects.filter(name__icontains=query)
+        return render(request, 'restcountries/search.html', {
+            'countries': countries
+        })
+    else:
+        return HttpResponseRedirect(reverse('index'))
+
 def api_all(request):
     countries = Country.objects.all()
     countries_list = list(countries.values())
