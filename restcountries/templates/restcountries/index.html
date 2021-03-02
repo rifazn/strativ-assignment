@@ -1,0 +1,35 @@
+{% extends "restcountries/base.html" %}
+
+{% block title %}
+    Countries List | Strativ Assignment
+{% endblock %}
+
+{% block body %}
+    <h1>All Countries</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Alphacode2</th>
+                <th>Capital</th>
+                <th>Timezone</th>
+                <th>Population</th>
+                <th>Flag</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        {% for country in countries %}
+        <tr>
+            <td>{{ country.name }}</td>
+            <td>{{ country.alphacode2 }}</td>
+            <td>{{ country.capital }}</td>
+            <td>{{ country.timezone }}</td>
+            <td>{{ country.population }}</td>
+            <td>{{ country.flag }}</td>
+            <td><a href="{% url 'restcountries:country' country.pk %}">Details</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

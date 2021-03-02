@@ -1,0 +1,20 @@
+{% extends "restcountries/base.html" %}
+
+{% block title %}
+    Countries List | Strativ Assignment
+{% endblock %}
+
+{% block body %}
+    <h1>Country: {{ country.name }}</h1>
+
+                <p>Name: {{ country.name }}</p>
+                <p>Alplhacode2: {{ country.alphacode2 }}</p>
+                <p>Capital: {{ country.capital }}</p>
+                <p>Timezone: {{ country.timezone }}</p>
+                <p>Population: {{ country.population }}</p>
+                <p>Flag: <a href="{{ country.flag }}">{{ country.flag }}</a></p>
+
+                <p><strong>Neighbours:</strong> {{ country.neighbouring_countries }}</p>
+                <p><strong>Languages spoken:</strong> {{ country.languages }}</p>
+{% endblock %}
+

@@ -7,6 +7,8 @@ from . import views
 app_name = 'restcountries'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('country/<int:pk>', views.country, name='country'),
+    path('edit_country/<int:pk>', views.edit_country, name='edit_country'),
 
     # Paths for exposing the REST API
 

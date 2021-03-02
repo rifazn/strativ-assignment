@@ -1,0 +1,17 @@
+{% extends "restcountries/base.html" %}
+
+{% block title %}
+    Edit Country | Strativ Assignment
+{% endblock %}
+
+{% block body %}
+    <h1>Edit Country: {{ form.name.value }}</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+        
+    </form>
+{% endblock %}
+

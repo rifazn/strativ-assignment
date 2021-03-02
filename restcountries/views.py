@@ -1,10 +1,36 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.forms.models import model_to_dict
+from django.forms import ModelForm
 
 from .models import Country
 
-# Create your views here.
+class CountryForm(ModelForm):
+    class Meta:
+        model = Country
+        fields = '__all__'
+
+def index(request):
+    countries = Country.objects.all()
+    return render(request, 'restcountries/index.html', {'countries':countries})
+
+def country(request, pk):
+    country = Country.objects.get(pk=pk)
+    return render(request, 'restcountries/country.html', {'country':country})
+
+def edit_country(request, pk):
+    if request.method != 'POST':
+        country = Country.objects.get(pk=pk)
+        form = CountryForm(instance=country)
+    else:
+        form = CountryForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('restcountries:index')
+
+    context = {'form': form}
+    return render(request, 'restcountries/edit_country.html', context)
+
 def api_all(request):
     countries = Country.objects.all()
     countries_list = list(countries.values())
@@ -78,5 +104,3 @@ def api_same_language(request, language):
 
     return JsonResponse(countries_list, safe=False)
 
-def index(request):
-    return HttpResponse("Hello!")
