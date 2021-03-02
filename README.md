@@ -30,8 +30,10 @@ The name of the project is `interview-assignment` and the main app is called
 
 1. Initialize a virtual environment
 
-    $ python -m venv venv
-    $ source venv/bin/activate
+```sh
+$ python -m venv venv
+$ source venv/bin/activate
+```
 
 2. Install the requirements: `pip install -r requirements`
 3. Run the server: `python manage.py runserver`
@@ -67,6 +69,8 @@ interacting with the database.
 
 ## Phase 2
 
+To verify the tasks, this table can be used.
+
 | No.   |  Function  |  API request and URL |
 | :---: | :-------------------------- | :--------------------------------------- |
 | 1.    | List all countries | GET `/api/countries` \* |
@@ -74,7 +78,7 @@ interacting with the database.
 | 3.    | Add a new country | Make POST request with data to `/api/countries` \* |
 | 4.    | Update a country's details | PUT request with data to `/api/countries/<pk>` \* |
 | 5.    | Delete a country instance | DELETE request to `/api/countries/<pk>` \* |
-| 6.    | List a country's neighbours | GET request to `/api/countries/1/neighbours/` |
+| 6.    | List a country's neighbours | GET request to `/api/countries/<pk>/neighbours/` |
 | 7.    | List country's who speak a specified language | GET request to `/api/language/<str:language_name>` \*\* |
 | 8.    | Search and list countries by partial country name | GET `api/countries/search=<str:name>&fields=name` |
 
@@ -82,3 +86,37 @@ interacting with the database.
 + __\*__: Also browsable by the browser
 + __\*\*__: GET `/api/countries/search=<str:language_name>&fields=languages`
 
+### Some context (my experience in the phase)
+
+You may find urls prefixed with `rest/` in the URLconf. Please use the urls
+prefixed with `api/` to judge me.
+
+I have littered the `restcountries.views` with views named with `api_`
+prefixes. This is when I thought I could just return JsonResponses to expose
+the project's API. This was before I had learned about the `Django Rest
+Framework`. Therefore, the url config is also littered with `rest/` prefixed
+urls. This is also why I did not include the `rest/` urls in the table above.
+
+When I finally learned `Django Rest Framework` I used the
+`restcountries/api-views.py` file to define `ViewSets` that correctly get
+called with `api/` urls.
+
+## Phase 3
+
+Search countries ny name: use the search bar on the left hand side.
+
+To browse a country in detail view, click on Details beside the country in the
+table from the root directory.
+
+## Phase 4
+
+To browse the APIs, a user needs to be logged in. You can use (user,pass)
+(`admin`,`1`) to log in from the root directory of the website, or register a
+user using the 'Register' link on the website.
+
+Thank you for giving me a chance here in Strativ and giving such a task to
+complete. _The task was really interesting_ and I learned a lot of new things
+while doing the assignment. I think I have completed all the tasks and I hope
+that my work will be favorable.
+
+Thanks to the Strativ team so very much again.
