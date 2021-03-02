@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'restcountries',
     # DRF for making APIs
     'rest_framework',
+    # For registering and handling users
+    'users',
 
     'django.contrib.admin',
     'django.contrib.auth',

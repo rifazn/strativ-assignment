@@ -16,6 +16,13 @@
                 <form action="{% url 'restcountries:search_country' %}" method="GET">
                     <input class="search" type="text" name="name" placeholder="Search by name">
                 </form>
+
+                {% if user.is_authenticated %}
+                  Hello, {{ user.username }}
+                {% else %}
+                  <a href="{% url 'users:login' %}">Log in</a>
+                {% endif %}
+
                 <div>
                     <a href="{% url 'restcountries:index' %}">Home</a>
                 </div>

@@ -21,6 +21,7 @@ from restcountries.api_views import LanguageList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('users/', include('users.urls')),
     path('', include('restcountries.urls')),
     path('api/', include(router.urls)),
     path('api/language/<str:language>', LanguageList.as_view())
