@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.forms.models import model_to_dict
 from django.forms import ModelForm
+from django.contrib.auth.decorators import login_required
 
 from .models import Country
 
@@ -10,14 +11,17 @@ class CountryForm(ModelForm):
         model = Country
         fields = '__all__'
 
+@login_required
 def index(request):
     countries = Country.objects.all()
     return render(request, 'restcountries/index.html', {'countries':countries})
 
+@login_required
 def country(request, pk):
     country = Country.objects.get(pk=pk)
     return render(request, 'restcountries/country.html', {'country':country})
 
+@login_required
 def edit_country(request, pk):
     if request.method != 'POST':
         country = Country.objects.get(pk=pk)
@@ -31,6 +35,7 @@ def edit_country(request, pk):
     context = {'form': form}
     return render(request, 'restcountries/edit_country.html', context)
 
+@login_required
 def search_country(request):
     query = request.GET.get('name')
     if query:
