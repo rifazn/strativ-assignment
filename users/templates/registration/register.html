@@ -1,0 +1,10 @@
+{% extends "restcountries/base.html" %}
+{% block body %}
+  <form action="{% url 'users:register' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button name="submit">Register</button>
+    <input type="hidden" name="next" value="{% url 'restcountries:index' %}">
+  </form>
+{% endblock body %}

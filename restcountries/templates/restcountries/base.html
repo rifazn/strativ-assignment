@@ -18,10 +18,11 @@
                 </form>
 
                 {% if user.is_authenticated %}
-                  Hello, {{ user.username }}
-                  <a href="{% url 'users:logout' %}">Log out</a>
+                  Hello, {{ user.username }}<br>
+                  <a href="{% url 'users:logout' %}">Log out</a><br>
                 {% else %}
-                  <a href="{% url 'users:login' %}">Log in</a>
+                <a href="{% url 'users:register' %}">Register</a><br>
+                <a href="{% url 'users:login' %}">Log in</a><br>
                 {% endif %}
 
                 <div>
