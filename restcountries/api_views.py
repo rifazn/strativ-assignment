@@ -1,4 +1,4 @@
-from rest_framework import viewsets, generics, filters
+from rest_framework import viewsets, generics, filters, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -10,6 +10,7 @@ class CountryViewset(viewsets.ModelViewSet):
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
     filter_backends = (CustomSearchFilter,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     # Get neighbours of a country instance
     @action(detail=True)

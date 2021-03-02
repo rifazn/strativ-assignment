@@ -24,5 +24,6 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('', include('restcountries.urls')),
     path('api/', include(router.urls)),
-    path('api/language/<str:language>', LanguageList.as_view())
+    path('api/language/<str:language>', LanguageList.as_view()),
+    path('api-auth/', include('rest_framework.urls'))
 ]
